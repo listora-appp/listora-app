@@ -1,33 +1,41 @@
 const express = require('express');
-const cors = require('cors');
 const bodyParser = require('body-parser');
-const { Configuration, OpenAIApi } = require('openai');
-
+const fetch = require('node-fetch');
 require('dotenv').config();
 
 const app = express();
-app.use(cors());
+const PORT = process.env.PORT || 3000;
+
 app.use(bodyParser.json());
-const port = process.env.PORT || 3000;
+app.use(express.static(__dirname));
 
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
+app.post('/api/flyers', async (req, res) => {
+  const { propertyDetails } = req.body;
 
-app.post('/generate', async (req, res) => {
-    const { prompt } = req.body;
-    try {
-        const completion = await openai.createChatCompletion({
-            model: "gpt-3.5-turbo",
-            messages: [{ role: "user", content: prompt }],
-        });
-        res.json({ result: completion.data.choices[0].message.content });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
+  const prompt = `Write a compelling real estate flyer based on the following listing:\n\n${propertyDetails}\n\nFlyer:`;
+
+  try {
+    const response = await fetch('https://api.openai.com/v1/completions', {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${process.env.OPENAI_API_KEY}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        model: 'text-davinci-003',
+        prompt,
+        max_tokens: 300,
+        temperature: 0.7,
+      }),
+    });
+
+    const data = await response.json();
+    const flyer = data.choices?.[0]?.text?.trim() || 'No result.';
+    res.status(200).json({ flyer });
+  } catch (error) {
+    console.error('Error:', error);
+    res.status(500).json({ error: 'Something went wrong.' });
+  }
 });
 
-app.listen(port, () => {
-    console.log(`Server running on port ${port}`);
-});
+app.listen(PORT, () => console.log(`Server running at http://localhost:${PORT}`));

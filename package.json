@@ -5,10 +5,7 @@
     "node": "18.x"
   },
   "description": "Backend for Listora AI",
-  "main": "server.js",
-  "scripts": {
-    "start": "node server.js"
-  },
+  "scripts": {},
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",

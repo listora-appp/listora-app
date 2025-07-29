@@ -1,45 +1,7 @@
+<h2>Generate Real Estate Flyer</h2>
+<textarea id="property-input" rows="6" cols="50" placeholder="Enter property details..."></textarea><br><br>
+<button id="generate-flyer">Generate</button>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Listora AI</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
-<body>
-  <div class="container">
-    <h1>Listora</h1>
-    <p>Your AI-Powered Property Marketing Assistant</p>
+<div id="flyer-output" style="margin-top:20px; white-space:pre-wrap;"></div>
 
-    <div class="form-section">
-      <h2>Generate Flyers</h2>
-      <form id="flyer-form">
-        <input type="text" placeholder="Enter property details" name="input" required />
-        <button type="submit">Generate</button>
-      </form>
-      <pre id="flyer-output"></pre>
-    </div>
-
-    <div class="form-section">
-      <h2>Generate Captions</h2>
-      <form id="caption-form">
-        <input type="text" placeholder="Enter social media details" name="input" required />
-        <button type="submit">Generate</button>
-      </form>
-      <pre id="caption-output"></pre>
-    </div>
-
-    <div class="form-section">
-      <h2>Generate Email Copy</h2>
-      <form id="email-form">
-        <input type="text" placeholder="Enter listing highlights" name="input" required />
-        <button type="submit">Generate</button>
-      </form>
-      <pre id="email-output"></pre>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+<script src="script.js"></script>

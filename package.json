@@ -1,13 +1,10 @@
 {
-  "name": "listora-backend",
+  "name": "listora-app",
   "version": "1.0.0",
-  "description": "Backend for Listora AI",
+  "description": "Frontend for Listora AI",
+  "engines": {
+    "node": "22.x"
+  },
   "scripts": {},
-  "dependencies": {
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.18.2",
-    "openai": "^4.20.0",
-    "body-parser": "^1.20.2"
-  }
+  "dependencies": {}
 }

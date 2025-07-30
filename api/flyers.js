@@ -33,13 +33,14 @@ export default async function handler(req, res) {
 
     const data = await response.json();
 
-    console.log('OpenAI raw response:', JSON.stringify(data)); // ✅ Useful for debugging
+    // Log the full raw response to help debug
+    console.log('🔍 OpenAI raw response:', JSON.stringify(data));
 
     const flyer = data.choices?.[0]?.message?.content?.trim() || 'No result.';
-
     res.status(200).json({ flyer });
   } catch (error) {
-    console.error('OpenAI error:', error);
+    console.error('❌ OpenAI API error:', error);
     res.status(500).json({ error: 'Failed to generate flyer.' });
   }
 }
+
